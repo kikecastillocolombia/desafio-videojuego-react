@@ -1,3 +1,11 @@
+API pública de RAWG (https://rawg.io/apidocs).
+
+Para utilizar la API, tendrás que crear una cuenta y solicitar la API KEY.
+
+# Variables de Entorno
+
+VITE_RAWG_API_KEY="e8f4e8fa6e234a6dab5c1a1c08959cca"
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
