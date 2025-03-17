@@ -1,0 +1,16 @@
+.filtersContainer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .filterSelect {
+    padding: 8px;
+    border: 1px solid #444;
+    background-color: #222;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

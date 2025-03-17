@@ -1,0 +1,70 @@
+/* Estilos para la página de detalles del juego */
+.detailContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    color: white;
+}
+
+.gameTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.coverImage {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.gameInfo {
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+.description {
+    margin-top: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 800px;
+    text-align: justify;
+}
+
+/* Estilo para el botón de volver */
+.backButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #e63946;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.backButton:hover {
+    background-color: #c62c3e;
+}
+
+/* Spinner de carga */
+.loader {
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid #e63946;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-top: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
