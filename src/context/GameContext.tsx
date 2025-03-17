@@ -43,7 +43,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const fetchGames = async () => {
       const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
-      const url = `https://api.rawg.io/api/games?key=${API_KEY}&ordering=-metacritic&page_size=20`;
+      const url = `https://api.rawg.io/api/games?key=${API_KEY}&ordering=-metacritic&page_size=100`;
       const { data } = await axios.get(url);
       setGames(data.results);
       setFilteredGames(data.results);
