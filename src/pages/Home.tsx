@@ -34,6 +34,9 @@ function Home() {
             >
               <img src={game.background_image} alt={game.name} className={styles.coverImage} />
               <h2>{game.name}</h2>
+              <p className={styles.genre}>
+                {game.genres.map((g) => g.name).join(", ")}
+              </p>
             </div>
           ))}
         </div>
