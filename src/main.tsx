@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { GameProvider } from './context/GameContext.tsx';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 /**
  * **Punto de entrada de la aplicación** 🚀
@@ -18,11 +18,11 @@ import { BrowserRouter } from 'react-router-dom';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {/* Habilita la navegación en la aplicación */}
-    <BrowserRouter>
+    <HashRouter>
       {/* Provee el contexto global de videojuegos */}
       <GameProvider>
         <App />
       </GameProvider>
-    </BrowserRouter>
+      </HashRouter>
   </StrictMode>,
 );
