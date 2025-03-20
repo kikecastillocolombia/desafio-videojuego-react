@@ -59,7 +59,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [tags, setTags] = useState<string[]>([]); // Lista de etiquetas obtenidas de la API
 
   // Estado para almacenar los filtros aplicados
-  const [filters, setFilters] = useState<Filters>({
+  const [, setFilters] = useState<Filters>({
     year: "",
     genre: "",
     platform: "",
@@ -87,7 +87,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     const fetchFilters = async () => {
       try {
         const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
-        const [genresRes, platformsRes, tagsRes, devsRes] = await Promise.all([
+        const [genresRes, platformsRes, tagsRes] = await Promise.all([
           axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`),
           axios.get(`https://api.rawg.io/api/platforms?key=${API_KEY}`),
           axios.get(`https://api.rawg.io/api/tags?key=${API_KEY}`),
