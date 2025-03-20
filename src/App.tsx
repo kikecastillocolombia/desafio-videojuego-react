@@ -8,8 +8,8 @@ function App() {
     <>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/game/:id" element={<GameDetail />} />
-    </Routes>
+      <Route path="/game/:id" element={<GameDetail key={location.pathname} />} />
+      </Routes>
       <h1>Desafio React</h1>
     </>
   )

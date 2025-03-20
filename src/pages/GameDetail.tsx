@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import styles from "./GameDetail.module.css"; // Importa estilos
+import styles from "./GameDetail.module.css";
 
 interface Game {
   id: number;
@@ -14,9 +14,9 @@ interface Game {
 
 function GameDetail() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate(); // Hook para navegar
+  const navigate = useNavigate();
   const [game, setGame] = useState<Game | null>(null);
-  const [loading, setLoading] = useState(true); // Estado de carga
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchGame = async () => {
@@ -36,7 +36,10 @@ function GameDetail() {
   }, [id]);
 
   const handleBack = () => {
-    navigate(-1); // Vuelve a la página anterior
+    navigate("/"); 
+    setTimeout(() => {
+      window.location.reload(); // 🔥 Fuerza el renderizado de Home
+    }, 100);
   };
 
   if (loading) {
@@ -56,7 +59,7 @@ function GameDetail() {
       <p className={styles.gameInfo}>Metacritic: {game.metacritic}</p>
       <p className={styles.gameInfo}>Lanzamiento: {game.released}</p>
       <p className={styles.description}>{game.description_raw}</p>
-      <button className={styles.backButton} onClick={handleBack}>Volver</button>
+      <button className={styles.backButton} onClick={handleBack}>Inicio</button>
     </div>
   );
 }

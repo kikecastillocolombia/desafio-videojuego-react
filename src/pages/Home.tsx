@@ -1,31 +1,43 @@
 import { useContext } from "react";
 import { GameContext } from "../context/GameContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Importamos useNavigate
 import styles from "./Home.module.css";
 import Filters from "../components/Filters";
+import SearchBar from "../components/SearchBar";
 
 function Home() {
   const context = useContext(GameContext);
   if (!context) return <p>Error cargando datos...</p>;
 
   const { games } = context;
+  const navigate = useNavigate(); // Hook para manejar la navegación
+
+  const handleCardClick = (id: number) => {
+    navigate(`/game/${id}`);
+    window.location.reload();
+  };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Videojuegos</h1>
       <div className={styles.homeContainer}>
-  <h1>Mejor Calificados</h1>
-  <Filters />
-  <div className={styles.gameList}>
-    {games.map((game) => (
-      <Link key={game.id} to={`/game/${game.id}`} className={styles.gameCard}>
-        <img src={game.background_image} alt={game.name} className={styles.coverImage} />
-        <h2>{game.name}</h2>
-      </Link>
-    ))}
-  </div>
-</div>
-
+        <h1>Mejor Calificados</h1>
+        <SearchBar />
+        <Filters />
+        <div className={styles.gameList}>
+          {games.map((game) => (
+            <div 
+              key={game.id} 
+              className={styles.gameCard} 
+              onClick={() => handleCardClick(game.id)} 
+              style={{ cursor: "pointer" }} // Aseguramos que sea clickeable
+            >
+              <img src={game.background_image} alt={game.name} className={styles.coverImage} />
+              <h2>{game.name}</h2>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

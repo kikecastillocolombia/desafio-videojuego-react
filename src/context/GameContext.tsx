@@ -23,6 +23,7 @@ interface GameContextType {
 }
 
 interface Filters {
+  searchQuery?: string;
   year?: string;
   genre?: string;
   platform?: string;
@@ -39,6 +40,16 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [platforms, setPlatforms] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const [developers, setDevelopers] = useState<string[]>([]);
+
+  const [filters, setFilters] = useState<Filters>({
+    year: "",
+    genre: "",
+    platform: "",
+    tag: "",
+    developer: "",
+    searchQuery: "",
+  });
+  
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -68,27 +79,38 @@ export function GameProvider({ children }: { children: ReactNode }) {
     fetchFilters();
   }, []);
 
-  const filterGames = ({ year, genre, platform, tag, developer }: Filters) => {
-    let filtered = games;
-
-    if (year) {
-      filtered = filtered.filter(game => game.released.startsWith(year));
-    }
-    if (genre) {
-      filtered = filtered.filter(game => game.genres.some(g => g.name === genre));
-    }
-    if (platform) {
-      filtered = filtered.filter(game => game.platforms.some(p => p.platform.name === platform));
-    }
-    if (tag) {
-      filtered = filtered.filter(game => game.tags.some(t => t.name === tag));
-    }
-    if (developer) {
-      filtered = filtered.filter(game => game.developers.some(d => d.name === developer));
-    }
-
-    setFilteredGames(filtered);
+  const filterGames = (newFilters: Filters) => {
+    setFilters((prevFilters) => {
+      const updatedFilters = { ...prevFilters, ...newFilters };
+      let filtered = games;
+  
+      if (updatedFilters.searchQuery) {
+        filtered = filtered.filter(game =>
+          game.name.toLowerCase().includes(updatedFilters.searchQuery ?? "".toLowerCase())
+        );
+      }
+      if (updatedFilters.year) {
+        filtered = filtered.filter(game => game.released.startsWith(updatedFilters.year ?? ""));
+      }
+      if (updatedFilters.genre) {
+        filtered = filtered.filter(game => game.genres.some(g => g.name === updatedFilters.genre));
+      }
+      if (updatedFilters.platform) {
+        filtered = filtered.filter(game => game.platforms.some(p => p.platform.name === updatedFilters.platform));
+      }
+      if (updatedFilters.tag) {
+        filtered = filtered.filter(game => game.tags.some(t => t.name === updatedFilters.tag));
+      }
+      if (updatedFilters.developer) {
+        filtered = filtered.filter(game => game.developers.some(d => d.name === updatedFilters.developer));
+      }
+  
+      setFilteredGames(filtered);
+      return updatedFilters; // Se guarda el estado actualizado
+    });
   };
+  
+  
 
   return (
     <GameContext.Provider value={{ games: filteredGames, genres, platforms, tags, developers, filterGames }}>
